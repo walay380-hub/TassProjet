@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | LEADER ALUMINIUM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+        .cart-items {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+        }
+        .cart-summary {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            padding: 1.5rem;
+            position: sticky;
+            top: 100px;
+        }
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid #eee;
+            align-items: center;
+        }
+        .cart-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .cart-item-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+        }
+        .cart-item-info {
+            flex-grow: 1;
+        }
+        .cart-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+        .cart-item-price {
+            font-weight: 700;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+        }
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .cart-qty-input {
+            width: 60px;
+            padding: 0.25rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+        }
+        .remove-btn {
+            color: #dc3545;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .remove-btn:hover { text-decoration: underline; }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .summary-total {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--secondary);
+            border-top: 2px solid #eee;
+            padding-top: 1rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .cart-container { grid-template-columns: 1fr; }
+            .cart-item { flex-direction: column; align-items: flex-start; }
+            .cart-item-img { width: 100%; height: 200px; }
+            .cart-item-controls { margin-top: 1rem; width: 100%; justify-content: space-between; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">LEADER <span>ALUMINIUM</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="catalog.html">Products</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" class="auth-link"><i class="fas fa-user"></i> Login</a>
+            </nav>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-5 mb-5 pt-4">
+        <h1 class="mb-4">Your Shopping Cart</h1>
+        
+        <div class="cart-container" id="cart-content">
+            <!-- Rendered by JS -->
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 LEADER ALUMINIUM. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', renderCartPage);
+        document.addEventListener('cartUpdated', renderCartPage);
+
+        function renderCartPage() {
+            const container = document.getElementById('cart-content');
+            
+            if (cart.length === 0) {
+                container.style.display = 'block';
+                container.innerHTML = `
+                    <div style="text-align:center; padding: 4rem; background: white; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                        <h2>Your cart is empty</h2>
+                        <p style="margin: 1rem 0;">Browse our modern products and add items to your cart.</p>
+                        <a href="catalog.html" class="btn btn-secondary">Go to Catalog</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.style.display = 'grid';
+            
+            let itemsHtml = '<div class="cart-items">';
+            cart.forEach(item => {
+                itemsHtml += `
+                    <div class="cart-item">
+                        <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                        <div class="cart-item-info">
+                            <a href="product.html?id=${item.id}" class="cart-item-title">${item.name}</a>
+                            <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">${item.category}</p>
+                            <span class="cart-item-price">${item.price.toFixed(2)} TND</span>
+                        </div>
+                        <div class="cart-item-controls">
+                            <input type="number" class="cart-qty-input" value="${item.quantity}" min="1" max="${item.stock}" onchange="updateCartQuantity(${item.id}, parseInt(this.value))">
+                            <button class="remove-btn" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                `;
+            });
+            itemsHtml += '</div>';
+
+            const total = getCartTotal();
+            const shipping = total > 5000 ? 0 : 500; // Free shipping over 5000 TND
+            const finalTotal = total + shipping;
+
+            let summaryHtml = `
+                <div class="cart-summary">
+                    <h3 class="mb-3" style="border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem;">Order Summary</h3>
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>${total.toFixed(2)} TND</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Estimated Shipping</span>
+                        <span>${shipping === 0 ? 'Free' : shipping.toFixed(2) + ' TND'}</span>
+                    </div>
+                    <div class="summary-row summary-total">
+                        <span>Total</span>
+                        <span>${finalTotal.toFixed(2)} TND</span>
+                    </div>
+                    
+                    <a href="checkout.html" class="btn btn-primary mt-4" style="width: 100%; font-size: 1.1rem; padding: 1rem;">Proceed to Checkout</a>
+                    <a href="catalog.html" class="btn btn-outline mt-2" style="width: 100%;">Continue Shopping</a>
+                </div>
+            `;
+
+            container.innerHTML = itemsHtml + summaryHtml;
+        }
+    </script>
+</body>
+</html>

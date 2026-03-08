@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | LEADER ALUMINIUM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-detail-container {
+            display: flex;
+            gap: 3rem;
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+        }
+        .product-detail-img {
+            flex: 1;
+            min-width: 300px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+        .product-detail-img img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+        }
+        .product-detail-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .stock-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .in-stock { background: #d4edda; color: #155724; }
+        .out-stock { background: #f8d7da; color: #721c24; }
+        
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .quantity-btn {
+            background: #eee;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .quantity-btn:hover { background: #ddd; }
+        #quantity-input {
+            width: 60px;
+            height: 40px;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1.1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .product-detail-container { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">LEADER <span>ALUMINIUM</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="catalog.html">Products</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" class="auth-link"><i class="fas fa-user"></i> Login</a>
+            </nav>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-5 mb-5 pt-4">
+        <a href="catalog.html" class="btn btn-outline mb-3"><i class="fas fa-arrow-left"></i> Back to Catalog</a>
+        
+        <div id="product-detail-wrapper">
+            <!-- Product injected here via JS -->
+            <div style="text-align:center; padding: 4rem;">Loading...</div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 LEADER ALUMINIUM. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+            const wrapper = document.getElementById('product-detail-wrapper');
+            
+            const product = productsData.find(p => p.id === productId);
+            
+            if (!product) {
+                wrapper.innerHTML = `<div style="text-align:center; padding: 4rem;"><h2>Product Not Found</h2><a href="catalog.html">Return to Catalog</a></div>`;
+                return;
+            }
+            
+            const stockClass = product.stock > 0 ? 'in-stock' : 'out-stock';
+            const stockText = product.stock > 0 ? `${product.stock} In Stock` : 'Out of Stock';
+            const isIndoor = product.use === 'indoor';
+            
+            wrapper.innerHTML = `
+                <div class="product-detail-container">
+                    <div class="product-detail-img">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-detail-info">
+                        <span style="text-transform:uppercase; color: #666; font-size: 0.9rem; letter-spacing: 1px;">
+                            ${product.category} &bull; ${isIndoor ? 'Indoor' : 'Outdoor'}
+                        </span>
+                        <h1 style="font-size: 2.5rem; margin-top: 0.5rem; color: var(--secondary);">${product.name}</h1>
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 1rem;">
+                            ${product.price.toFixed(2)} TND
+                        </p>
+                        <span class="stock-badge ${stockClass}">${stockText}</span>
+                        
+                        <div style="margin: 1.5rem 0; border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 1.5rem 0;">
+                            <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Description</h3>
+                            <p style="color: #444; line-height: 1.8;">${product.fullDesc}</p>
+                        </div>
+                        
+                        ${product.stock > 0 ? `
+                        <div class="quantity-selector">
+                            <button class="quantity-btn" onclick="let q=document.getElementById('quantity-input'); if(q.value>1)q.value--">-</button>
+                            <input type="number" id="quantity-input" value="1" min="1" max="${product.stock}" readonly>
+                            <button class="quantity-btn" onclick="let q=document.getElementById('quantity-input'); if(q.value<${product.stock})q.value++">+</button>
+                        </div>
+                        <button onclick="addCurrentToCart(${product.id})" class="btn btn-primary" style="font-size:1.1rem; padding: 1rem; width:100%;">
+                            <i class="fas fa-shopping-cart" style="margin-right: 8px;"></i> Add to Cart
+                        </button>
+                        ` : `
+                        <button class="btn btn-secondary" disabled style="opacity:0.5; cursor:not-allowed;">Out of Stock</button>
+                        `}
+                    </div>
+                </div>
+            `;
+        });
+        
+        function addCurrentToCart(id) {
+            const quantity = parseInt(document.getElementById('quantity-input').value);
+            addToCart(id, quantity);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | LEADER ALUMINIUM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="background: #f4f6f9;">
+    
+    <div style="display: flex; min-height: 100vh;">
+        <!-- Sidebar -->
+        <aside style="width: 250px; background: var(--secondary); color: white; padding: 2rem 0; display: flex; flex-direction: column;">
+            <div style="padding: 0 2rem; margin-bottom: 2rem;">
+                <h2 style="color: white; font-size: 1.2rem;">LEADER <span style="color: var(--primary);">ADMIN</span></h2>
+            </div>
+            <nav style="flex-grow: 1;">
+                <a href="#" style="display: block; padding: 1rem 2rem; color: white; background: rgba(255,255,255,0.1); border-left: 4px solid var(--primary); margin-bottom: 0.5rem;"><i class="fas fa-chart-line" style="width: 25px;"></i> Dashboard</a>
+                <a href="#" style="display: block; padding: 1rem 2rem; color: #ccc; transition: all 0.3s;"><i class="fas fa-box" style="width: 25px;"></i> Products</a>
+                <a href="#" style="display: block; padding: 1rem 2rem; color: #ccc; transition: all 0.3s;"><i class="fas fa-shopping-cart" style="width: 25px;"></i> Orders</a>
+                <a href="#" style="display: block; padding: 1rem 2rem; color: #ccc; transition: all 0.3s;"><i class="fas fa-users" style="width: 25px;"></i> Customers</a>
+            </nav>
+            <div style="padding: 0 2rem;">
+                <a href="index.html" style="color: #ccc; font-size: 0.9rem;"><i class="fas fa-sign-out-alt"></i> Back to Store</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main style="flex-grow: 1; padding: 2rem;">
+            <header style="position: static; background: white; padding: 1rem 2rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; height: auto;">
+                <h1 style="font-size: 1.5rem; margin: 0; color: var(--secondary);">Dashboard Overview</h1>
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <span style="font-weight: 500;">Admin User</span>
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--secondary); color: white; display: flex; align-items: center; justify-content: center;"><i class="fas fa-user-shield"></i></div>
+                </div>
+            </header>
+
+            <div class="grid grid-cols-4 gap-3 mb-4">
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); border-left: 4px solid #007bff;">
+                    <h4 style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">Total Revenue</h4>
+                    <p style="font-size: 1.8rem; font-weight: 700; color: var(--secondary);">52,400 TND</p>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); border-left: 4px solid #28a745;">
+                    <h4 style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">Total Orders</h4>
+                    <p style="font-size: 1.8rem; font-weight: 700; color: var(--secondary);">124</p>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); border-left: 4px solid #ffc107;">
+                    <h4 style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">Products</h4>
+                    <p style="font-size: 1.8rem; font-weight: 700; color: var(--secondary);">6 Active</p>
+                </div>
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm); border-left: 4px solid #dc3545;">
+                    <h4 style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem; text-transform: uppercase;">Customers</h4>
+                    <p style="font-size: 1.8rem; font-weight: 700; color: var(--secondary);">89</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                    <h3 style="border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem;">Recent Orders</h3>
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="text-align: left; color: #666; border-bottom: 2px solid #eee;">
+                                <th style="padding: 0.75rem 0;">Order ID</th>
+                                <th>Customer</th>
+                                <th>Status</th>
+                                <th>Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 1rem 0; font-weight: 500;">#592034</td>
+                                <td>Mohamed Ali</td>
+                                <td><span style="background: #fff3cd; color: #856404; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem;">Processing</span></td>
+                                <td style="font-weight: 600;">3499.00 TND</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid #eee;">
+                                <td style="padding: 1rem 0; font-weight: 500;">#993120</td>
+                                <td>Salma Trabelsi</td>
+                                <td><span style="background: #d4edda; color: #155724; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem;">Shipped</span></td>
+                                <td style="font-weight: 600;">149.00 TND</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 1rem 0; font-weight: 500;">#120444</td>
+                                <td>Ahmed Ben Saleh</td>
+                                <td><span style="background: #d4edda; color: #155724; padding: 0.2rem 0.6rem; border-radius: 20px; font-size: 0.8rem;">Delivered</span></td>
+                                <td style="font-weight: 600;">388.00 TND</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div style="background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem;">
+                        <h3 style="margin: 0;">Quick Manage Products</h3>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.9rem;"><i class="fas fa-plus"></i> Add New</button>
+                    </div>
+                    <div id="admin-product-list" class="flex-col gap-1">
+                        <!-- Loaded from current products simulation -->
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const list = document.getElementById('admin-product-list');
+            let html = '';
+            productsData.slice(0, 4).forEach(p => {
+                html += `
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 0.75rem; border: 1px solid #eee; border-radius: 5px;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <img src="${p.image}" style="width: 40px; height: 40px; object-fit: cover; border-radius: 4px;">
+                            <div>
+                                <div style="font-weight: 600; font-size: 0.9rem;">${p.name}</div>
+                                <div style="color: #666; font-size: 0.8rem;">Stock: ${p.stock}</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button style="border: none; background: none; color: #007bff; cursor: pointer; margin-right: 0.5rem;"><i class="fas fa-edit"></i></button>
+                            <button style="border: none; background: none; color: #dc3545; cursor: pointer;"><i class="fas fa-trash"></i></button>
+                        </div>
+                    </div>
+                `;
+            });
+            list.innerHTML = html;
+        });
+    </script>
+</body>
+</html>

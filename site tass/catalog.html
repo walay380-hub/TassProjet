@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | LEADER ALUMINIUM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">LEADER <span>ALUMINIUM</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="catalog.html">Products</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" class="auth-link"><i class="fas fa-user"></i> Login</a>
+            </nav>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mt-5 mb-5 pt-3">
+        <h1 class="mb-4">Product Catalog</h1>
+        
+        <div class="flex gap-4" style="align-items: flex-start;">
+            <!-- Filters Sidebar -->
+            <aside style="width: 250px; flex-shrink: 0; background: white; padding: 1.5rem; border-radius: var(--border-radius); box-shadow: var(--shadow-sm);">
+                <div class="mb-4">
+                    <h3 class="font-size: 1.1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; mb-2">Search</h3>
+                    <input type="text" id="searchInput" class="form-control" placeholder="Search products...">
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-size: 1.1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; mb-2">Category</h3>
+                    <div class="flex-col gap-1">
+                        <label><input type="checkbox" class="filter-category" value="aluminum"> Aluminum Structures</label>
+                        <label><input type="checkbox" class="filter-category" value="plants"> Artificial Plants</label>
+                        <label><input type="checkbox" class="filter-category" value="decoration"> Decoration Items</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-size: 1.1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; mb-2">Use</h3>
+                    <div class="flex-col gap-1">
+                        <label><input type="checkbox" class="filter-use" value="indoor"> Indoor</label>
+                        <label><input type="checkbox" class="filter-use" value="outdoor"> Outdoor</label>
+                    </div>
+                </div>
+
+                <div class="mb-4">
+                    <h3 class="font-size: 1.1rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; mb-2">Max Price (<span id="priceVal">5000</span> TND)</h3>
+                    <input type="range" id="priceRange" min="0" max="5000" value="5000" style="width: 100%;">
+                </div>
+                
+                <button id="clearFiltersBtn" class="btn btn-outline" style="width: 100%; padding: 0.5rem;">Clear Filters</button>
+            </aside>
+
+            <!-- Product Grid -->
+            <div style="flex-grow: 1;">
+                <div id="catalog-grid" class="grid grid-cols-3 gap-3">
+                    <!-- Products injected via JS -->
+                </div>
+                <div id="no-products-msg" style="display: none; text-align: center; padding: 3rem; background: white; border-radius: var(--border-radius);">
+                    <h3>No products found matching your filters.</h3>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 LEADER ALUMINIUM. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            currentProducts = [...productsData];
+            
+            // Handle URL params if coming from home page categories
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialCategory = urlParams.get('cat');
+            if (initialCategory) {
+                const cb = document.querySelector(`.filter-category[value="${initialCategory}"]`);
+                if (cb) cb.checked = true;
+            }
+
+            renderCatalog();
+            setupFilters();
+        });
+
+        function setupFilters() {
+            const searchInput = document.getElementById('searchInput');
+            const categoryBoxes = document.querySelectorAll('.filter-category');
+            const useBoxes = document.querySelectorAll('.filter-use');
+            const priceRange = document.getElementById('priceRange');
+            const priceVal = document.getElementById('priceVal');
+            const clearBtn = document.getElementById('clearFiltersBtn');
+
+            const applyFilters = () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCats = Array.from(categoryBoxes).filter(cb => cb.checked).map(cb => cb.value);
+                const selectedUses = Array.from(useBoxes).filter(cb => cb.checked).map(cb => cb.value);
+                const maxPrice = parseFloat(priceRange.value);
+                
+                priceVal.textContent = maxPrice;
+
+                currentProducts = productsData.filter(p => {
+                    const matchesSearch = p.name.toLowerCase().includes(searchTerm) || p.shortDesc.toLowerCase().includes(searchTerm);
+                    const matchesCat = selectedCats.length === 0 || selectedCats.includes(p.category);
+                    const matchesUse = selectedUses.length === 0 || selectedUses.includes(p.use);
+                    const matchesPrice = p.price <= maxPrice;
+                    return matchesSearch && matchesCat && matchesUse && matchesPrice;
+                });
+                renderCatalog();
+            };
+
+            searchInput.addEventListener('input', applyFilters);
+            categoryBoxes.forEach(cb => cb.addEventListener('change', applyFilters));
+            useBoxes.forEach(cb => cb.addEventListener('change', applyFilters));
+            priceRange.addEventListener('input', applyFilters);
+            
+            clearBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                categoryBoxes.forEach(cb => cb.checked = false);
+                useBoxes.forEach(cb => cb.checked = false);
+                priceRange.value = 5000;
+                applyFilters();
+            });
+            
+            // Initial filter check (handles URL params)
+            applyFilters();
+        }
+
+        function renderCatalog() {
+            const grid = document.getElementById('catalog-grid');
+            const noMsg = document.getElementById('no-products-msg');
+            
+            if (currentProducts.length === 0) {
+                grid.style.display = 'none';
+                noMsg.style.display = 'block';
+            } else {
+                grid.style.display = 'grid';
+                noMsg.style.display = 'none';
+                let html = '';
+                currentProducts.forEach(product => {
+                    html += createProductCard(product);
+                });
+                grid.innerHTML = html;
+            }
+        }
+    </script>
+</body>
+</html>

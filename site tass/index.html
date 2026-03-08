@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEADER ALUMINIUM | E-Commerce</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header / Navigation -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">LEADER <span>ALUMINIUM</span></a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="catalog.html">Products</a>
+                <a href="contact.html">Contact</a>
+                <a href="login.html" class="auth-link"><i class="fas fa-user"></i> Login</a>
+            </nav>
+            <div class="nav-icons">
+                <a href="cart.html" class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('images/3bea3ce4-204f-4c1a-be2b-5bdff195291b.jpg') center/cover no-repeat; padding: 120px 0; color: white; text-align: center; border-radius: var(--border-radius); margin: 2rem; box-shadow: var(--shadow-md);">
+            <div class="container">
+                <h1 style="font-size: 3rem; margin-bottom: 1rem; color: white;">Premium Aluminum & Decor</h1>
+                <p style="font-size: 1.25rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9;">Discover top-quality artificial plants, modern decoration items, and robust outdoor aluminum structures.</p>
+                <a href="catalog.html" class="btn btn-secondary">Shop Now <i class="fas fa-arrow-right ml-1"></i></a>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section class="container mt-5 mb-5">
+            <h2 class="text-center mb-4">Shop by Category</h2>
+            <div class="grid grid-cols-3 gap-3">
+                <a href="catalog.html?cat=aluminum" class="category-card" style="position: relative; overflow: hidden; border-radius: var(--border-radius); height: 250px;">
+                    <img src="images/4ca0e234-a52f-459d-83bf-992b177e2f6e.jpg" alt="Aluminum Structures" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); display: flex; align-items: flex-end; padding: 1.5rem;">
+                        <h3 style="color: white; margin: 0; font-size: 1.5rem;">Aluminum Structures</h3>
+                    </div>
+                </a>
+                <a href="catalog.html?cat=plants" class="category-card" style="position: relative; overflow: hidden; border-radius: var(--border-radius); height: 250px;">
+                    <img src="images/7c9b343a-3eb9-4995-ab5c-b4f7bd419a2c.jpg" alt="Artificial Plants" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); display: flex; align-items: flex-end; padding: 1.5rem;">
+                        <h3 style="color: white; margin: 0; font-size: 1.5rem;">Artificial Plants</h3>
+                    </div>
+                </a>
+                <a href="catalog.html?cat=decoration" class="category-card" style="position: relative; overflow: hidden; border-radius: var(--border-radius); height: 250px;">
+                    <img src="images/78b6bf7a-33b7-42f7-93b5-71229962fc3f.jpg" alt="Decoration Items" style="width: 100%; height: 100%; object-fit: cover;">
+                    <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.7), transparent); display: flex; align-items: flex-end; padding: 1.5rem;">
+                        <h3 style="color: white; margin: 0; font-size: 1.5rem;">Decoration Items</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Popular Products Section -->
+        <section class="container mt-5 mb-5">
+            <div class="flex justify-between items-center mb-4">
+                <h2>Popular Products</h2>
+                <a href="catalog.html" class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.9rem;">View All</a>
+            </div>
+            <div class="grid grid-cols-4 gap-4" id="popular-products-grid">
+                <!-- Products will be injected here via JS -->
+            </div>
+        </section>
+
+        <!-- Promotions Section -->
+        <section class="container mb-5" style="background-color: var(--secondary); color: white; border-radius: var(--border-radius); padding: 3rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem;">
+            <div style="flex: 1;">
+                <h2 style="color: white; font-size: 2.5rem; margin-bottom: 1rem;">Summer Sale!</h2>
+                <p style="font-size: 1.1rem; margin-bottom: 2rem; color: #ddd;">Get up to 20% off on all outdoor aluminum structures and artificial plants. Upgrade your patio today.</p>
+                <a href="catalog.html" class="btn btn-secondary">Shop Offers</a>
+            </div>
+            <div style="flex: 1; border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow-md);">
+                <img src="images/82750d60-19bb-444f-9b32-341bc26cee79.jpg" alt="Summer Sale Image">
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>LEADER ALUMINIUM</h4>
+                    <p style="color: #ccc; margin-bottom: 1rem;">Premium provider of artificial plants, decoration items, and outdoor aluminum structures in Tunisia.</p>
+                    <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+                        <a href="#"><i class="fab fa-facebook" style="color: white;"></i></a>
+                        <a href="#"><i class="fab fa-instagram" style="color: white;"></i></a>
+                        <a href="#"><i class="fab fa-twitter" style="color: white;"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="catalog.html">Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="login.html">Login / Register</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-links">
+                        <li style="color: #ccc;"><i class="fas fa-map-marker-alt" style="width: 20px;"></i> Tunis, Tunisia</li>
+                        <li style="color: #ccc;"><i class="fas fa-phone" style="width: 20px;"></i> +216 55 123 456</li>
+                        <li style="color: #ccc;"><i class="fas fa-envelope" style="width: 20px;"></i> contact@leaderaluminium.tn</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 LEADER ALUMINIUM. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render some popular products
+            const grid = document.getElementById('popular-products-grid');
+            if (grid) {
+                // Take first 4 products
+                const popular = productsData.slice(0, 4);
+                let html = '';
+                popular.forEach(product => {
+                    html += createProductCard(product);
+                });
+                grid.innerHTML = html;
+            }
+        });
+    </script>
+</body>
+</html>
